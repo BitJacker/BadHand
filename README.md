@@ -33,24 +33,25 @@ Ensure you are using a Linux environment (Kali Linux recommended) with Python 3.
    git clone [https://github.com/BitJacker/BadHand.git](https://github.com/BitJacker/BadHand.git)
    cd BadHand
 Configure the environment
+```
 Install the required libraries via the package manager:
-
 Bash
-
 pip install -r requirements.txt
+```
 🔌 Usage
 The framework is managed by a central script that acts as a menu:
-
+```
 Bash
-
 python3 badhand.py
+```
 [!IMPORTANT]
 For network-layer tools (e.g., deauther, scan), you must run the script with administrative privileges to allow raw packet injection:
-
+```
 Bash
-
 sudo python3 badhand.py
+```
 📁 Project Structure
+```
 Plaintext
 
 bad_hand/
@@ -61,6 +62,7 @@ bad_hand/
 │   ├── deauther.py
 │   └── ... (other scripts)
 └── README.md
+```
 
 
 ⚠️ Legal Disclaimer
